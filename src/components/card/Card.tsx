@@ -3,9 +3,14 @@ import { productCardEnum } from '../../dataEnums/product'
 
 const Card = ({product} : {product: productCardEnum}) => {
   return (
-    <div>
-        <div>{product.title}</div>
-        <img src={product.image} alt="" />
+    <div className='card'>
+        <img src={product.image} alt="error" />
+        <h4>{product.title}</h4>
+        
+        <div>
+          {product.stars} <span>{product.ratings}</span>
+        </div>
+
     </div>
   )
 }

@@ -8,18 +8,23 @@ const Main = () => {
   const [products, setProducts] = useState<productCardEnum[]>(new ProductsGenerator().productList)
   const [productsToShow, setProductsToShow] = useState<productCardEnum[]>([])
   const [filters, setFilters] = useState<filtersEnum>({
-    brands: [{ name: 'Mango', value: 'mango', isSelected: false }],
-    priceRange: [{ start: 100, end: 400, isSelected: false }],
-    rating: [{ rating: 1, isSelected: false }]
+    brands: [
+      { name: 'Electronic Cotton Fish', value: 'Electronic Cotton Fish', isSelected: true }, 
+      { name: 'Fantastic Frozen Chips', value: 'Fantastic Frozen Chips', isSelected: true }
+    ],
+    priceRange: { start: 100, end: 1000 },
+    rating: { value: 2 }
   })
 
   useEffect(() => {
+    const brand = filters.brands.filter(brand => brand.isSelected)
     setProductsToShow(products.filter(product => {
-      // const check1 = filter?.rating ? product.ratings >= filter?.rating : true
-      // const check2 = filter?.brands?.includes(product.title)
-      // const check3 = filter?.priceRange.start && filter?.priceRange.end ? filter?.priceRange.start <= product.price && filter?.priceRange.end >= product.price : true
-      // return check1 && check2 && check3
+      const check1 = product.ratings >= filters.rating.value
+      const check2 = brand.find(item => item.name === product.title)
+      const check3 = filters.priceRange.start <= product.price && filters.priceRange.end >= product.price
+      return check1 && check2 && check3
     }))
+    
   }, [filters, products])
 
   return (

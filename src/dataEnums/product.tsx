@@ -1,22 +1,22 @@
 interface selectedEnum {
-    isSelected: boolean 
+    isSelected: boolean
 }
 interface brandFilterEnum extends selectedEnum{
     value: string,
     name: string
 }
-interface priceRange extends selectedEnum{
+interface priceRange {
     start: number,
     end: number,
 }
-interface ratingEnum extends selectedEnum {
-    rating: number
+interface ratingEnum {
+    value: number
 }
 
 export interface filtersEnum {
     brands: brandFilterEnum[]
-    priceRange: priceRange[]
-    rating: ratingEnum[]
+    priceRange: priceRange
+    rating: ratingEnum
 }
 
 export interface productCardEnum {
@@ -24,7 +24,7 @@ export interface productCardEnum {
     image: string,
     title: string,
     description: string,
-    price: string,
+    price: number,
     stars: number,
     ratings: number,
     isLiked: boolean
