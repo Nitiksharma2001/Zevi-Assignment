@@ -12,7 +12,7 @@ const Main = () => {
   const [filters, setFilters] = useState<filtersEnum>({
     brands: [],
     price: 10000,
-    rating: 5
+    rating: 0
   })
 
   useEffect(() => {
@@ -24,14 +24,13 @@ const Main = () => {
           discountPercentage: product.discountPercentage as number,
           price: faker.number.int({ min: 100, max: 2000 }),
           previousPrice: faker.number.int({ min: 2500, max: 4000 }),
-          rating: faker.number.float({ min: 0, max: 5 }).toFixed(1),
+          rating: faker.number.int({ min: 0, max: 5 }),
           views: faker.number.int({ min: 0, max: 1000 })
         }
       })
       const uniqBrands = [...new Set(products.map((product: productCardEnum) => product.brand))] as string[]
       setProductsList(products)
       setProductsToShow(products)
-      
       setUniqueBrands(uniqBrands)
     }
     fetchData()
@@ -39,7 +38,7 @@ const Main = () => {
 
   useEffect(() => {
     setProductsToShow(productsList.filter(product => {
-      const check1 = product.rating <= filters.rating
+      const check1 = product.rating >= filters.rating
       const check2 = filters.brands.length > 0 ? filters.brands.find(item => item === product.brand) : true
       const check3 = product.price <= filters.price
       return check1 && check2 && check3
