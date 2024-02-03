@@ -16,7 +16,7 @@ const Card = ({ product }: { product: productCardEnum }) => {
         <div className='view' style={{ display: view ? 'block' : 'none' }}>View Product</div>
       </div>
       <div style={{ fontSize: '1.3rem' }}>{product.title}</div>
-      <div><span style={{ fontWeight: 'bolder' }}>Brand</span> {product.brand}</div>
+      <div><span style={{ fontWeight: 'bolder' }}>Brand:</span> {product.brand}</div>
       <div>
         <span style={{ color: 'grey', textDecoration: 'line-through' }}>
           {`Rs. ${product.previousPrice}`}</span>

@@ -4,15 +4,15 @@ import { filtersEnum } from "../../dataEnums/product"
 const Filters = ({uniqueBrands, setFilters}: {uniqueBrands: string[] , setFilters:Dispatch<SetStateAction<filtersEnum>>}) => {
   const [selectedBrands, setSelectedBrand] = useState<string[]>([])
   const handleBrandFilterChange = (brandName: string) => {
+    let newBrands = [...selectedBrands, brandName]
     if(selectedBrands.includes(brandName)){
-      setSelectedBrand(selectedBrands.filter(brand => brand !== brandName))
-    } else {
-      setSelectedBrand([...selectedBrands, brandName])
-    }
+      newBrands = selectedBrands.filter(brand => brand !== brandName)
+    } 
+    setSelectedBrand(newBrands)
     setFilters((filter: filtersEnum) => {
       return {
         ...filter,
-        brands: selectedBrands
+        brands: newBrands
       }
     })
   }
@@ -68,7 +68,15 @@ const Filters = ({uniqueBrands, setFilters}: {uniqueBrands: string[] , setFilter
                 return (
                   <div className="checkBox" key={index}>
                     <input type="radio" name="rating" onChange={() => handleRatingFilterChange(index)}/>
-                    <label>{index + 1}</label>
+                    <label>
+                      {
+                        new Array(5).fill('1').map((item, index2) => {
+                          return (
+                            <span className={`fa fa-star ${index2 <= index ? 'checked': ''}`}></span>
+                          )
+                        })
+                      }
+                     </label>
                   </div> 
                 )
               })
