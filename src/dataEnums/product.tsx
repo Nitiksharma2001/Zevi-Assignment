@@ -13,7 +13,8 @@ export interface productCardEnum {
     discountPercentage: number,
     images: string[],
     price: number,
+    previousPrice: number,
     rating: number,
-    stock: number,
+    views: number,
     thumbnail: string,
 }

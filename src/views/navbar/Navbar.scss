@@ -1,0 +1,13 @@
+.navbar{
+    margin-bottom: 2rem;
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    .element{
+        text-decoration: none;
+        color: black;
+        font-weight: bolder;
+        font-size: 2rem;
+        letter-spacing: 1.5rem;
+    }
+}

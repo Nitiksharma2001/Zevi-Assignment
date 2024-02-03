@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
+import "./Main.scss"
 import { productCardEnum, filtersEnum } from '../../dataEnums/product';
 import ProductCard from "../../components/card/Card"
-import { ProductsGenerator } from '../../features/productsGeneratror';
 import Filters from './Filters';
+import { faker } from '@faker-js/faker';
 
 const Main = () => {
   const [productsList, setProductsList] = useState<productCardEnum[]>([])
@@ -21,9 +22,10 @@ const Main = () => {
         return {
           ...product,
           discountPercentage: product.discountPercentage as number,
-          price: product.price as number,
-          rating: product.rating as number,
-          stock: product.stock as number
+          price: faker.number.int({ min: 100, max: 2000 }),
+          previousPrice: faker.number.int({ min: 2500, max: 4000 }),
+          rating: faker.number.float({ min: 0, max: 5 }).toFixed(1),
+          views: faker.number.int({ min: 0, max: 1000 })
         }
       })
       const uniqBrands = [...new Set(products.map((product: productCardEnum) => product.brand))] as string[]
@@ -36,7 +38,6 @@ const Main = () => {
   }, [])
 
   useEffect(() => {
-    console.log(filters)
     setProductsToShow(productsList.filter(product => {
       const check1 = product.rating <= filters.rating
       const check2 = filters.brands.length > 0 ? filters.brands.find(item => item === product.brand) : true
@@ -46,9 +47,9 @@ const Main = () => {
   }, [filters, productsList])
 
   return (
-    <div>
-      <div> <Filters uniqueBrands={uniqueBrands} setFilters={setFilters} /> </div>
-      <div style={{display: 'flex', flexWrap: 'wrap'}}> {productsToShow.length > 0 ? productsToShow.map(product => <ProductCard product={product} />) : 'Loading'} </div>
+    <div className='mainSearchAndFilter'>
+      <div className='sideBar'> <Filters uniqueBrands={uniqueBrands} setFilters={setFilters} /> </div>
+      <div className='main'> {productsToShow.length > 0 ? productsToShow.map((product, index) => <div className="card" key={index}><ProductCard product={product} /></div>) : 'Loading'} </div>
     </div>
   )
 }
