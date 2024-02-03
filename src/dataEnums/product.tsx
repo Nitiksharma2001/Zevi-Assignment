@@ -1,18 +1,6 @@
-interface selectedEnum {
-    isSelected: boolean
-}
-interface brandFilterEnum extends selectedEnum{
-    value: string,
-    name: string
-}
-interface priceRange {
-    start: number,
-    end: number,
-}
-
 export interface filtersEnum {
     brands: string[]
-    priceRange: priceRange
+    price: number
     rating: number
 }
 

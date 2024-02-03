@@ -10,8 +10,8 @@ const Main = () => {
   const [uniqueBrands, setUniqueBrands] = useState<string[]>([])
   const [filters, setFilters] = useState<filtersEnum>({
     brands: [],
-    priceRange: { start: 0, end: 10000 },
-    rating: 0
+    price: 10000,
+    rating: 5
   })
 
   useEffect(() => {
@@ -43,9 +43,9 @@ const Main = () => {
   useEffect(() => {
     console.log(filters)
     setProductsToShow(productsList.filter(product => {
-      const check1 = product.rating >= filters.rating
+      const check1 = product.rating <= filters.rating
       const check2 = filters.brands.find(item => item === product.brand)
-      const check3 = filters.priceRange.start <= product.price && filters.priceRange.end >= product.price
+      const check3 = product.price <= filters.price
       return check1 && check2 && check3
     }))
   }, [filters, productsList])
