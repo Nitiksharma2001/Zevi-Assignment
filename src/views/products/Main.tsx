@@ -31,11 +31,6 @@ const Main = () => {
       setProductsToShow(products)
       
       setUniqueBrands(uniqBrands)
-      setFilters(filter => { 
-        return {
-          ...filter,
-          brands: uniqBrands,
-      }})
     }
     fetchData()
   }, [])
@@ -44,7 +39,7 @@ const Main = () => {
     console.log(filters)
     setProductsToShow(productsList.filter(product => {
       const check1 = product.rating <= filters.rating
-      const check2 = filters.brands.find(item => item === product.brand)
+      const check2 = filters.brands.length > 0 ? filters.brands.find(item => item === product.brand) : true
       const check3 = product.price <= filters.price
       return check1 && check2 && check3
     }))
