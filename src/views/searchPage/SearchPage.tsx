@@ -3,7 +3,6 @@ import "./SearchPage.scss"
 import { Link } from "react-router-dom"
 
 const SearchPage = () => {
-  const [text, setText] = useState('')
   const [showTrends, setShowTrends] = useState(false)
   const imagesAndText = [
     {
@@ -29,7 +28,7 @@ const SearchPage = () => {
         <input className='InputBox' 
         onFocus={() => setShowTrends(true)}
         type="text" placeholder='Search' 
-        onChange={(e) => setText(e.target.value)} />
+        />
 
         <Link to='/search'><i className="fa-solid fa-magnifying-glass"></i></Link>
       </div>
