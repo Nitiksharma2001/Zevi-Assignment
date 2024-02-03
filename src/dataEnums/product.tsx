@@ -9,23 +9,23 @@ interface priceRange {
     start: number,
     end: number,
 }
-interface ratingEnum {
-    value: number
-}
 
 export interface filtersEnum {
-    brands: brandFilterEnum[]
+    brands: string[]
     priceRange: priceRange
-    rating: ratingEnum
+    rating: number
 }
 
 export interface productCardEnum {
-    id: string,
-    image: string,
+    id: number,
     title: string,
+    brand: string,
+    category: string,
     description: string,
+    discountPercentage: number,
+    images: string[],
     price: number,
-    stars: number,
-    ratings: number,
-    isLiked: boolean
+    rating: number,
+    stock: number,
+    thumbnail: string,
 }

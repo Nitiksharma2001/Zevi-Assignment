@@ -1,27 +1,42 @@
 import { ChangeEvent, Dispatch, SetStateAction, useState } from "react"
 import { filtersEnum } from "../../dataEnums/product"
 
-const Filters = ({filters, setFilters}: {filters: filtersEnum , setFilters: Dispatch<filtersEnum>}) => {
+const Filters = ({uniqueBrands, setFilters}: {uniqueBrands: string[] , setFilters: Dispatch<filtersEnum>}) => {
   const handleBrandFilterChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setFilters({...filters, brands: filters.brands.map(filter => {
-      const {value, name}: {value: string, name: string} = e.target
-      if(filter.value === value && filter.name === name){
-        return {...filter, isSelected: !filter.isSelected}
-      }
-      return filter
-    })})
+    
   }
   return (
       <div>
-          <h3>Brand</h3>
+        <div>
+          <h3>BRAND</h3>
           {
-            filters.brands.map((brand, index) => {
+            uniqueBrands.map((brand, index) => {
               return <div key={index}>
-                  <label htmlFor={index.toString()}>{brand.name}</label>
-                  <input type="checkbox" value={brand.value} name={brand.name} id={index.toString()} onChange={handleBrandFilterChange}/>
+                  <input type="checkbox" id={index.toString()} onChange={handleBrandFilterChange}/>
+                  <label htmlFor={index.toString()}>{brand}</label>
               </div>
             })
           }
+        </div> 
+
+        <div>
+          <h3>PRICE RANGE</h3>
+          <div>
+            <input type="checkbox" id={(1).toString()} onChange={handleBrandFilterChange}/>
+            <label htmlFor={(1).toString()}>{'upto 500'}</label>
+          </div>
+        </div>
+
+        <div>
+          <h3>RATINGS</h3>
+          <div>
+            <input type="checkbox" id={(1).toString()} onChange={handleBrandFilterChange}/>
+            <label htmlFor={(1).toString()}>{'5'}</label>
+            
+            <input type="checkbox" id={(1).toString()} onChange={handleBrandFilterChange}/>
+            <label htmlFor={(1).toString()}>{'4'}</label>
+          </div>
+        </div>
       </div>
   )
 }
